@@ -28,6 +28,7 @@
         <button id="install-btn" class="secondary">Install full-screen game</button>
         <button id="feedback-btn" class="secondary">Send feedback</button>
         <button id="about-btn" class="secondary">Credits &amp; Support</button>
+        <button id="exit-game-btn" class="text-button">Exit game</button>
       </div>
     </section>
 
@@ -86,7 +87,7 @@
         <strong class="creator-name">KAMATE KATENDE TIMOTHEE</strong>
         <p><a id="support-email" href="mailto:kamatekatende@gmail.com">kamatekatende@gmail.com</a></p>
         <div class="notice"><strong id="privacy-title">Privacy</strong><p id="privacy-note">This game stores settings and campaign saves only on your device. It currently uses no accounts, advertising, tracking, or analytics.</p></div>
-        <p id="version-label" class="version">Prototype version 0.3.0</p>
+        <p id="version-label" class="version">Prototype version 0.4.0</p>
         <button id="about-back-btn" class="primary">Back</button>
       </div>
     </section>
@@ -134,34 +135,44 @@
       </div>
     </section>
 
-    <div id="rotate-phone" aria-hidden="true"><span>↻</span><strong>Rotate your phone</strong><small>The campaign plays best in landscape.</small></div>
+    <div id="rotate-phone" aria-hidden="true"><span>↻</span><strong id="rotate-title">Rotate your phone</strong><small id="rotate-note">The campaign plays best in landscape.</small></div>
 
     <div id="pause-overlay" class="pause-overlay hidden" role="dialog" aria-modal="true" aria-labelledby="pause-title">
       <div>
-        <p class="eyebrow">CAMPAIGN PAUSED</p><h2 id="pause-title">Operation suspended</h2>
+        <p id="pause-eyebrow" class="eyebrow">CAMPAIGN PAUSED</p><h2 id="pause-title">Operation suspended</h2>
         <p id="save-status">Your position can be saved on this device.</p>
         <button id="resume-btn" class="primary">Resume</button>
         <button id="save-btn" class="secondary">Save campaign</button>
         <button id="quit-btn" class="secondary">Save and quit to menu</button>
+        <button id="exit-pause-btn" class="text-button">Save and exit game</button>
       </div>
     </div>
 
+    <section id="exit-screen" class="screen" aria-labelledby="exit-title">
+      <div class="title-card compact">
+        <p class="eyebrow">THE LAST PATROL</p>
+        <h2 id="exit-title">Game closed</h2>
+        <p id="exit-message" class="subtitle">Your campaign is saved and all game sound has stopped. You may now close this window.</p>
+        <button id="return-game-btn" class="primary">Return to game</button>
+      </div>
+    </section>
+
     <dialog id="settings-dialog" class="settings-dialog">
       <form method="dialog">
-        <div class="settings-head"><h2>Sound</h2><button value="close" aria-label="Close settings">✕</button></div>
-        <label>Music <output id="music-value">55%</output><input id="music-volume" type="range" min="0" max="100" value="55"></label>
-        <label>Gun sounds <output id="gun-value">70%</output><input id="gun-volume" type="range" min="0" max="100" value="70"></label>
-        <label>Effects <output id="effects-value">80%</output><input id="effects-volume" type="range" min="0" max="100" value="80"></label>
-        <p>Original game soundtrack. Headphones recommended.</p>
-        <button class="primary" value="close">Done</button>
+        <div class="settings-head"><h2 id="sound-title">Sound</h2><button id="sound-close" value="close" aria-label="Close settings">✕</button></div>
+        <label><span id="music-label">Music</span> <output id="music-value">55%</output><input id="music-volume" type="range" min="0" max="100" value="55"></label>
+        <label><span id="gun-label">Gun sounds</span> <output id="gun-value">70%</output><input id="gun-volume" type="range" min="0" max="100" value="70"></label>
+        <label><span id="effects-label">Effects</span> <output id="effects-value">80%</output><input id="effects-volume" type="range" min="0" max="100" value="80"></label>
+        <p id="sound-note">Original game soundtrack. Headphones recommended.</p>
+        <button id="sound-done" class="primary" value="close">Done</button>
       </form>
     </dialog>
 
     <dialog id="install-dialog" class="settings-dialog">
       <form method="dialog">
-        <div class="settings-head"><h2>Full-screen app</h2><button value="close" aria-label="Close">✕</button></div>
+        <div class="settings-head"><h2 id="install-title">Full-screen app</h2><button id="install-close" value="close" aria-label="Close">✕</button></div>
         <p id="install-help">On iPhone: tap Share, choose “Add to Home Screen,” then open the game from its new icon. On Android: use “Install app” or “Add to Home screen” in the browser menu.</p>
-        <button class="primary" value="close">Understood</button>
+        <button id="install-done" class="primary" value="close">Understood</button>
       </form>
     </dialog>
 
