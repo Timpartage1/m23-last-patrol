@@ -26,7 +26,46 @@
         <button id="continue-save-btn" class="primary hidden">Continue saved campaign</button>
         <button id="how-btn" class="secondary">How to play</button>
         <button id="install-btn" class="secondary">Install full-screen game</button>
+        <button id="feedback-btn" class="secondary">Send feedback</button>
         <button id="about-btn" class="secondary">Credits &amp; Support</button>
+      </div>
+    </section>
+
+    <section id="feedback-screen" class="screen" aria-labelledby="feedback-title">
+      <div class="title-card compact feedback-card">
+        <p id="feedback-eyebrow" class="eyebrow">HELP IMPROVE THE GAME</p>
+        <h2 id="feedback-title">Player feedback</h2>
+        <p id="feedback-intro" class="subtitle">Your report goes directly to the creator. No information is sent until you choose Email report.</p>
+        <form id="feedback-form">
+          <fieldset>
+            <legend id="rating-label">Overall experience</legend>
+            <div class="rating" aria-label="Overall experience">
+              <input type="radio" name="rating" id="rate-1" value="1" required><label for="rate-1" aria-label="1 out of 5">★</label>
+              <input type="radio" name="rating" id="rate-2" value="2"><label for="rate-2" aria-label="2 out of 5">★</label>
+              <input type="radio" name="rating" id="rate-3" value="3"><label for="rate-3" aria-label="3 out of 5">★</label>
+              <input type="radio" name="rating" id="rate-4" value="4"><label for="rate-4" aria-label="4 out of 5">★</label>
+              <input type="radio" name="rating" id="rate-5" value="5"><label for="rate-5" aria-label="5 out of 5">★</label>
+            </div>
+          </fieldset>
+          <label for="feedback-type"><span id="feedback-type-label">What would you like to report?</span>
+            <select id="feedback-type" required>
+              <option id="type-general" value="General feedback">General feedback</option>
+              <option id="type-controls" value="Controls or gameplay">Controls or gameplay</option>
+              <option id="type-bug" value="Bug or performance problem">Bug or performance problem</option>
+              <option id="type-story" value="Story or historical accuracy">Story or historical accuracy</option>
+              <option id="type-audio" value="Sound or music">Sound or music</option>
+            </select>
+          </label>
+          <label for="feedback-message"><span id="feedback-message-label">Tell us what happened or what should improve</span>
+            <textarea id="feedback-message" maxlength="1500" required placeholder="Please include the mission and what you expected to happen."></textarea>
+          </label>
+          <label class="diagnostics"><input id="include-diagnostics" type="checkbox" checked><span id="diagnostics-label">Include basic device and game information to help diagnose problems</span></label>
+          <p id="feedback-privacy" class="form-note">The diagnostic report includes browser type, screen size, language and saved mission—not your name, location or phone number.</p>
+          <div id="feedback-status" class="form-status" role="status" aria-live="polite"></div>
+          <button id="email-feedback-btn" class="primary" type="submit">Email report</button>
+          <button id="copy-feedback-btn" class="secondary" type="button">Copy report</button>
+          <button id="feedback-back-btn" class="secondary" type="button">Back</button>
+        </form>
       </div>
     </section>
 
@@ -47,7 +86,7 @@
         <strong class="creator-name">KAMATE KATENDE TIMOTHEE</strong>
         <p><a id="support-email" href="mailto:kamatekatende@gmail.com">kamatekatende@gmail.com</a></p>
         <div class="notice"><strong id="privacy-title">Privacy</strong><p id="privacy-note">This game stores settings and campaign saves only on your device. It currently uses no accounts, advertising, tracking, or analytics.</p></div>
-        <p id="version-label" class="version">Prototype version 0.2.0</p>
+        <p id="version-label" class="version">Prototype version 0.3.0</p>
         <button id="about-back-btn" class="primary">Back</button>
       </div>
     </section>
@@ -164,6 +203,7 @@
         <h2 id="ending-title">A soldier falls.<br />A story remains.</h2>
         <p id="ending-body">On 2 January 2014, Mamadou Ndala and two soldiers were killed when their convoy was attacked near Ngadi, north of Beni. A United Nations report described the assailants as unidentified. This game does not claim to resolve the disputed responsibility.</p>
         <p id="ending-dedication" class="dedication">Dedicated to civilians and peacekeepers who have lost their lives in eastern Congo.</p>
+        <button id="ending-feedback-btn" class="secondary">Share your feedback</button>
         <button id="restart-btn" class="primary">Play again</button>
       </div>
     </section>

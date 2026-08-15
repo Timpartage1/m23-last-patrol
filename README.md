@@ -31,6 +31,7 @@ This repository includes `render.yaml` for a Render Static Site. Connect the rep
 - Mission-specific terrain and restrictions: Goma lava fields, Rutshuru forest checkpoints, and the narrow Ngadi forest road
 - Progressive difficulty through tougher enemies, faster fire, larger detection ranges, and gated security lines
 - English/French language selection covering menus, objectives, missions, radio dialogue, instructions, failure outcomes, and historical ending
+- Bilingual player feedback form with optional device diagnostics, email delivery, and a copy-to-clipboard fallback
 - Pause/resume plus manual and automatic local checkpoint saves
 - Continue-from-save restores health, score, position, direction, objectives, squad, enemies, and mission progress
 - Save-and-quit and campaign completion shut audio down immediately; hiding the app suspends audio and opens pause
