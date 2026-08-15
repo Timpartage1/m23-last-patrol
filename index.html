@@ -1,0 +1,173 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, user-scalable=no" />
+  <meta name="theme-color" content="#101b1d" />
+  <meta name="description" content="A short, respectful 2D story game inspired by events in eastern Congo." />
+  <link rel="manifest" href="manifest.webmanifest" />
+  <link rel="apple-touch-icon" href="assets/icon-192.png" />
+  <link rel="stylesheet" href="styles.css" />
+  <title>M23: The Last Patrol</title>
+</head>
+<body>
+  <main id="app">
+    <section id="start-screen" class="screen active" aria-labelledby="game-title">
+      <div class="title-card">
+        <p id="start-eyebrow" class="eyebrow">A STORY FROM EASTERN CONGO</p>
+        <h1 id="game-title">THE LAST PATROL</h1>
+        <p id="start-subtitle" class="subtitle">A short 2D prototype inspired by the courage of Colonel Mamadou Ndala and the civilians caught in war.</p>
+        <div class="notice">
+          <strong id="history-label">Historical note</strong>
+          <p id="history-note">This is a fictionalized educational drama, not a documentary. Dialogue and missions are invented. Violence is stylized and non-graphic.</p>
+        </div>
+        <label class="language-picker" for="language-select"><span id="language-label">Language</span><select id="language-select"><option value="en">English</option><option value="fr">Français</option></select></label>
+        <button id="start-btn" class="primary">Begin mission</button>
+        <button id="continue-save-btn" class="primary hidden">Continue saved campaign</button>
+        <button id="how-btn" class="secondary">How to play</button>
+        <button id="install-btn" class="secondary">Install full-screen game</button>
+        <button id="about-btn" class="secondary">Credits &amp; Support</button>
+      </div>
+    </section>
+
+    <section id="how-screen" class="screen" aria-labelledby="how-title">
+      <div class="title-card compact">
+        <h2 id="how-title">How to play</h2>
+        <p id="how-body">Move and aim with the left control. Mamadou and his weapon face the last direction pressed; use <b>OK</b> to fire that way or interact with a nearby objective. Secure enough objectives to open restricted sectors.</p>
+        <p id="how-desktop">Desktop: arrow keys or WASD to move, Enter or Space for OK.</p>
+        <button id="back-btn" class="primary">Back</button>
+      </div>
+    </section>
+
+    <section id="about-screen" class="screen" aria-labelledby="about-title">
+      <div class="title-card compact about-card">
+        <p class="eyebrow">THE LAST PATROL</p>
+        <h2 id="about-title">Credits &amp; Support</h2>
+        <p id="creator-label">Created by</p>
+        <strong class="creator-name">KAMATE KATENDE TIMOTHEE</strong>
+        <p><a id="support-email" href="mailto:kamatekatende@gmail.com">kamatekatende@gmail.com</a></p>
+        <div class="notice"><strong id="privacy-title">Privacy</strong><p id="privacy-note">This game stores settings and campaign saves only on your device. It currently uses no accounts, advertising, tracking, or analytics.</p></div>
+        <p id="version-label" class="version">Prototype version 0.2.0</p>
+        <button id="about-back-btn" class="primary">Back</button>
+      </div>
+    </section>
+
+    <section id="game-screen" class="screen">
+      <header class="hud">
+        <div><span class="label">MISSION</span><strong id="mission-label">1 / 3</strong></div>
+        <div class="objective-wrap"><span class="label">OBJECTIVE</span><strong id="objective-label">Reach the village</strong></div>
+        <div><span class="label">TEAM</span><strong id="team-label">4</strong></div>
+        <div><span class="label">MAMADOU</span><strong id="morale-label">100</strong></div>
+        <div><span class="label">SCORE</span><strong id="score-label">0</strong></div>
+        <button id="map-btn" class="map-button">MAP</button>
+        <button id="pause-btn" class="map-button" aria-label="Pause game">Ⅱ</button>
+        <button id="settings-btn" class="map-button" aria-label="Sound settings">⚙</button>
+      </header>
+      <div id="canvas-wrap">
+        <canvas id="game" width="960" height="540" role="img" aria-label="2D mission area"></canvas>
+        <div id="touch-zone-left" aria-hidden="true"></div>
+        <div id="touch-zone-right" aria-hidden="true"></div>
+        <div id="virtual-stick" class="virtual-stick hidden" aria-hidden="true"><span id="stick-knob"></span></div>
+        <div id="dialogue" class="dialogue hidden" aria-live="polite">
+          <p id="speaker"></p>
+          <p id="line"></p>
+          <button id="continue-btn">Continue</button>
+        </div>
+        <div id="toast" class="toast hidden" aria-live="polite"></div>
+        <div id="feedback-layer" aria-live="polite"></div>
+        <div id="game-over" class="game-over hidden" role="dialog" aria-modal="true" aria-labelledby="game-over-title">
+          <p class="eyebrow">MISSION FAILED</p>
+          <h2 id="game-over-title">Mamadou has fallen</h2>
+          <p id="failure-consequence">Your squad was lost and Mamadou took too much fire. Change your route, protect the team, and try again.</p>
+          <strong id="failed-score">Score: 0</strong>
+          <button id="retry-btn" class="primary">Retry mission</button>
+          <button id="campaign-btn" class="secondary">Restart campaign</button>
+        </div>
+      </div>
+      <div class="controls" aria-label="Touch controls">
+        <div class="dpad">
+          <button data-dir="up" aria-label="Move up">▲</button>
+          <button data-dir="left" aria-label="Move left">◀</button>
+          <button data-dir="down" aria-label="Move down">▼</button>
+          <button data-dir="right" aria-label="Move right">▶</button>
+        </div>
+        <button id="action-btn" class="action">OK<br><small>ENTER</small></button>
+      </div>
+    </section>
+
+    <div id="rotate-phone" aria-hidden="true"><span>↻</span><strong>Rotate your phone</strong><small>The campaign plays best in landscape.</small></div>
+
+    <div id="pause-overlay" class="pause-overlay hidden" role="dialog" aria-modal="true" aria-labelledby="pause-title">
+      <div>
+        <p class="eyebrow">CAMPAIGN PAUSED</p><h2 id="pause-title">Operation suspended</h2>
+        <p id="save-status">Your position can be saved on this device.</p>
+        <button id="resume-btn" class="primary">Resume</button>
+        <button id="save-btn" class="secondary">Save campaign</button>
+        <button id="quit-btn" class="secondary">Save and quit to menu</button>
+      </div>
+    </div>
+
+    <dialog id="settings-dialog" class="settings-dialog">
+      <form method="dialog">
+        <div class="settings-head"><h2>Sound</h2><button value="close" aria-label="Close settings">✕</button></div>
+        <label>Music <output id="music-value">55%</output><input id="music-volume" type="range" min="0" max="100" value="55"></label>
+        <label>Gun sounds <output id="gun-value">70%</output><input id="gun-volume" type="range" min="0" max="100" value="70"></label>
+        <label>Effects <output id="effects-value">80%</output><input id="effects-volume" type="range" min="0" max="100" value="80"></label>
+        <p>Original game soundtrack. Headphones recommended.</p>
+        <button class="primary" value="close">Done</button>
+      </form>
+    </dialog>
+
+    <dialog id="install-dialog" class="settings-dialog">
+      <form method="dialog">
+        <div class="settings-head"><h2>Full-screen app</h2><button value="close" aria-label="Close">✕</button></div>
+        <p id="install-help">On iPhone: tap Share, choose “Add to Home Screen,” then open the game from its new icon. On Android: use “Install app” or “Add to Home screen” in the browser menu.</p>
+        <button class="primary" value="close">Understood</button>
+      </form>
+    </dialog>
+
+    <section id="map-screen" class="screen" aria-labelledby="map-title">
+      <div class="map-layout">
+        <div class="map-copy">
+          <p class="eyebrow">NORTH KIVU • CAMPAIGN ROUTE</p>
+          <h2 id="map-title">From Goma to Beni</h2>
+          <p id="map-note">Follow the RN2 north through volcanic highlands, the Virunga corridor, Lubero and Butembo.</p>
+          <div class="map-legend"><span><i class="dot current"></i> Current</span><span><i class="dot route"></i> RN2 route</span></div>
+          <button id="map-continue-btn" class="primary">Continue</button>
+        </div>
+        <svg class="north-kivu-map" viewBox="0 0 520 620" role="img" aria-label="Learning map of the Goma to Beni corridor in North Kivu">
+          <path class="province" d="M132 575 L85 495 112 406 92 326 135 250 155 150 230 55 365 38 448 88 434 184 472 248 423 321 446 407 388 478 345 579 236 601Z"/>
+          <path class="lake kivu" d="M91 609 C57 565 52 505 87 461 C111 488 126 530 132 575Z"/>
+          <path class="lake edward" d="M342 259 C382 226 425 233 434 278 C423 316 389 344 351 323 C334 302 331 279 342 259Z"/>
+          <path class="park" d="M253 480 C221 425 247 351 305 310 C333 287 342 224 321 173 L364 121 C405 171 392 220 372 253 C346 299 353 354 328 404 C310 442 289 469 253 480Z"/>
+          <path class="road" d="M111 548 C151 510 208 487 242 449 C272 414 260 380 289 347 C312 322 326 286 312 253 C297 219 272 195 266 159 C259 122 286 91 316 69"/>
+          <g class="volcano"><path d="M148 491 l24 -44 25 44z"/><path d="M165 469 l7 -12 7 12z"/></g>
+          <g class="place" data-stage="0" transform="translate(111 548)"><circle r="10"/><text x="18" y="5">Goma</text></g>
+          <g class="place minor" transform="translate(171 480)"><circle r="6"/><text x="14" y="4">Rutshuru</text></g>
+          <g class="place minor" transform="translate(270 407)"><circle r="6"/><text x="14" y="4">Kanyabayonga</text></g>
+          <g class="place minor" transform="translate(289 347)"><circle r="6"/><text x="14" y="4">Lubero</text></g>
+          <g class="place" data-stage="1" transform="translate(312 253)"><circle r="10"/><text x="16" y="4">Butembo</text></g>
+          <g class="place" data-stage="2" transform="translate(316 69)"><circle r="10"/><text x="16" y="4">Beni</text><text class="small" x="16" y="23">Ngadi • ambush site</text></g>
+          <text class="water-label" x="57" y="548" transform="rotate(-72 57 548)">LAKE KIVU</text>
+          <text class="water-label" x="355" y="286">LAKE EDWARD</text>
+          <text class="park-label" x="287" y="378" transform="rotate(-71 287 378)">VIRUNGA NATIONAL PARK</text>
+          <text class="terrain-label" x="112" y="432">NYIRAGONGO</text>
+          <text class="country-label" x="405" y="525">RWANDA</text>
+          <text class="country-label" x="185" y="285">DR CONGO</text>
+        </svg>
+      </div>
+    </section>
+
+    <section id="ending-screen" class="screen" aria-labelledby="ending-title">
+      <div class="title-card ending">
+        <p class="eyebrow">JANUARY 2014</p>
+        <h2 id="ending-title">A soldier falls.<br />A story remains.</h2>
+        <p id="ending-body">On 2 January 2014, Mamadou Ndala and two soldiers were killed when their convoy was attacked near Ngadi, north of Beni. A United Nations report described the assailants as unidentified. This game does not claim to resolve the disputed responsibility.</p>
+        <p id="ending-dedication" class="dedication">Dedicated to civilians and peacekeepers who have lost their lives in eastern Congo.</p>
+        <button id="restart-btn" class="primary">Play again</button>
+      </div>
+    </section>
+  </main>
+  <script type="module" src="src/game.js"></script>
+</body>
+</html>
