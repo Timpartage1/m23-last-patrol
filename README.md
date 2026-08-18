@@ -35,6 +35,8 @@ This repository includes `render.yaml` for a Render Static Site. Connect the rep
 - Safe save-and-exit flow for browsers and installed PWAs, with complete audio shutdown
 - Reduced animation work while paused to improve mobile battery use and performance
 - Mobile aim assistance, mission-entry protection, and adaptive tactical support after casualties or retries
+- Mission-complete celebration sequence with fanfare, animated stars, particles, and score presentation
+- Fictionalized final convoy blockade, dismounting attackers, crossfire, and scripted Ngadi ambush
 - Pause/resume plus manual and automatic local checkpoint saves
 - Continue-from-save restores health, score, position, direction, objectives, squad, enemies, and mission progress
 - Save-and-quit and campaign completion shut audio down immediately; hiding the app suspends audio and opens pause
